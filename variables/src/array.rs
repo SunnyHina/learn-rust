@@ -12,5 +12,5 @@ fn main() {
     let second = a[1];
     println!("The first value is: {first}");
     println!("The second value is: {second}");
-    let some = a[9];
+    // let some = a[9];
 }
