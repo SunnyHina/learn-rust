@@ -1,34 +1,31 @@
-//references-and-borrowing
-
-// 在任意给定时间(每一行代码?)，要么只能有一个可变引用，要么只能有多个不可变引用。
-// 引用必须总是有效的。
+// 编写一个函数，该函数接收一个用空格分隔单词的字符串，并返回在该字符串中找到的第一个单词。如果函数在该字符串中并未找到空格，则整个字符串就是一个单词，所以应该返回整个字符串。
 
 fn main() {
-    let mut s1 = String::from("hello");
+    let s = String::from("Hello World!");
 
-    let len = calculate_length(&s1); //像是指针
-
-    println!("The length of '{}' is {}.", s1, len);
-
-    change(&mut s1);
-    println!("{}", &&s1);
-
-    // 不允许这样声明两个可变引用(除非不用他们)
-    // 防止了同时操作一个资源,避免数据竞争
-    // let r1 = &mut s1;
-    // let r2 = &mut s1;
-    // println!("{}", r1);
-
-    let r1 = &mut s1;
-    println!("{}", r1);
-    let r2 = &mut s1;
-    println!("{}", r2);
+    let first_word_i = first_word_index(&s);
+    // 字符串 slice（string slice）是 String 中一部分值的引用
+    // 切片也是引用,一定有&
+    println!("{}", &s[..first_word_i]);
+    println!("{}", first_word(&s))
 }
 
-fn calculate_length(s: &String) -> usize {
+fn first_word_index(s: &String) -> usize {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
     s.len()
 }
 
-fn change(some_string: &mut String) {
-    some_string.push_str(", world");
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for(i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s
 }

@@ -8,7 +8,7 @@ fn main() {
                                         // takes_and_gives_back 中，
                                         // 它也将返回值移给 s3
                                         // 这时的s2已经不可以使用了
-    println!("{}", s1)
+    println!("{}", s1);
 
     // 额外的函数调用
     let s1 = String::from("hello");

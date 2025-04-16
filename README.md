@@ -3,6 +3,9 @@ rust-book.cs.brown.edu
 https://kaisery.github.io/trpl-zh-cn/title-page.html
 https://rust.now.cc/ch03-03-how-functions-work.html
 
+你还真别说,这所有权还真挺烧脑.
+
+
 在 Linux 或 macOS 上安装 rustup
 如果你使用 Linux 或 macOS，打开终端并输入如下命令：
 
