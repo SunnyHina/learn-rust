@@ -1,61 +1,64 @@
-struct User {
-    active: bool,
-    username: String,
-    email: String,
-    sign_in_count: u64,
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
 
-// 元组结构体（tuple structs）
-struct Color(i32, i32, i32);
-struct Point(i32, i32, i32);
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
 
-// 类单元结构体（unit-like structs）
-struct AlwaysEqual;
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+
+    // 是不是正方形
+    fn is_square(&self) -> bool {
+        self.width == self.height
+    }
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width >= other.width && self.height >= other.height
+    }
+
+    // 关联函数,用于创建实例,可以对创建过程进行定制
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+
 
 fn main() {
-    let user1 = User{
-        active: true,
-        username: String::from("someusername123"),
-        email: String::from("someone@example.com"),
-        sign_in_count: 1,
+    let rect1 = Rectangle {
+        width: 50,
+        height: 50,
     };
-    println!("{}", user1.username);
-    let user2 = User {
-        active: user1.active,
-        username: String::from("anotherusername567"),
-        email: String::from("another@example.com"),
-        sign_in_count: user1.sign_in_count,
-    };
-    println!("{}", user2.username);
-    let user3 = User {
-        email: String::from("another@example.com"),
-        ..user2
-    };
-    // 现在不能使用user2了
-    // 如果只使用结构体中实现了Copy trait 的类型创建新的结构体,那么原来的结构体还可以使用
-    // println!("{}", user2.username);
-    println!("{}", user3.username);
-    println!("{}", user3.email);
-    let black = Color(0,0,0);
-    let origin = Point(0,0,0);
 
-    let subject = AlwaysEqual;
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+
+    println!("The rectangle has a nonzero width; it is {}", rect1.width());
+
+    println!("The rectangle is {}a square.", if rect1.is_square() { "" } else {"not "});
+
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
+    let sq = Rectangle::square(3);
+    println!("{}", sq.area())
 }
-
-
-// struct User {
-//     active: bool,
-// 如果在结构体中使用引用,需要声明生命周期
-//     username: &str,
-//     email: &str,
-//     sign_in_count: u64,
-// }
-
-// fn main() {
-//     let user1 = User {
-//         active: true,
-//         username: "someusername123",
-//         email: "someone@example.com",
-//         sign_in_count: 1,
-//     };
-// }
