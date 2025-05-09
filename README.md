@@ -6,9 +6,15 @@ https://kaisery.github.io/trpl-zh-cn/title-page.html
 
 https://rust.now.cc/ch03-03-how-functions-work.html
 
+[圣经](https://course.rs/about-book.html)
+
 # 😖 学习 Rust 真的让人头大(这句话是gemini自动补全的)
 
 你还真别说,这所有权还真挺烧脑.
+
+几天不看要忘完了
+
+我得放生我的云服务器了,同步一下先
 
 ## 安装和运行Rust
 
